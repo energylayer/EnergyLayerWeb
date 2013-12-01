@@ -22,7 +22,7 @@ public class DataController {
     @RequestMapping(value = "/data/post", method = {GET, POST})
     @ResponseStatus(value = OK)
     public void getFromSensor(@ModelAttribute Data data){
-        System.out.println("/data/post" + data.getDeviceId());
+        System.out.println("/data/post/" + data.getDeviceId());
         dataService.processData(data);
     }
 

@@ -19,14 +19,14 @@ Run jetty plugin via maven
 
 Test it via browser
 
--post data from sensor:
+-open test page which emulates sending data from sensor, there you can specify sensor devide id:
 
->http://localhost:8080/webapp/data/post?deviceId=2&data=21
+>http://localhost:8080/webapp/test
 
--get latest sensor data
+-watch sent data from sensor via interactive chart, and specify device id if needed
 
->http://localhost:8080/webapp/data/get/2
+>http://localhost:8080/webapp/
 
--get last 10 aggregated posted data
+-get last 10 aggregated posted data for device id = 2
 
 >http://localhost:8080/webapp/data/aggregated/get/2?count=10

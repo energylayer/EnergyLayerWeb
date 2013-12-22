@@ -7,9 +7,9 @@ import javax.persistence.*;
  */
 @javax.persistence.Entity
 @Table(name = "DATA")
-public class Data extends AbstractEntity {
+public class Data extends AbstractEntity<Long> {
 
-    @Column(name = "deviceId")
+    @Column(name = "DEVICEID")
     private int deviceId;
 
     @Column(name="DATA")

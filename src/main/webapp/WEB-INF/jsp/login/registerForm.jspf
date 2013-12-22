@@ -1,0 +1,5 @@
+<c:url value="/login/register" var="registerUrl"/>
+<form action="${registerUrl}" method="GET">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="submit" value="Register">
+</form>

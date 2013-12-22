@@ -1,0 +1,20 @@
+<c:url value="/login" var="loginUrl"/>
+<form action="${loginUrl}" method="POST">
+    <div>
+        <label for="username"><spring:message code='username'/></label>
+        <input id="username" name="username" type="text">
+    </div>
+    <div>
+        <label for="password"><spring:message code='password'/></label>
+        <input id="password" name="password" type="password">
+    </div>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <div>
+        <input type="submit" value="Login">
+    </div>
+    <c:if test="${param.error != null}">
+        <div class="error">
+            Invalid username or password.
+        </div>
+    </c:if>
+</form>

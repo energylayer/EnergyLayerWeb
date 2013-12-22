@@ -6,7 +6,7 @@ $(function () {
     var i = 1;
 
     function retrievData(){
-        var deviceId = $('input').val();
+        var deviceId = $('input[name=deviceId]').val();
         $.ajax({
             url: contextPath + '/data/get/' + deviceId,
             dataType: "json",

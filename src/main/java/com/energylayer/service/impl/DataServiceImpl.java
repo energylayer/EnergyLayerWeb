@@ -77,11 +77,11 @@ public class DataServiceImpl implements DataService {
     private void saveData(Data data) {
         Integer[] dataArray = dataMap.get(data.getDeviceId());
         synchronized (dataArray) {
+            addToArray(dataArray, data.getData());
             if(dataArray[dataArray.length - 1] != null){
                 flushData(data.getDeviceId(), dataArray);
                 eraseArray(dataArray);
             }
-            addToArray(dataArray, data.getData());
         }
     }
 
@@ -114,5 +114,11 @@ public class DataServiceImpl implements DataService {
         return mean/dataArray.length;
     }
 
+    public void setDataDao(DataDao dataDao) {
+        this.dataDao = dataDao;
+    }
 
+    public void setCacheArrayLength(int cacheArrayLength) {
+        this.cacheArrayLength = cacheArrayLength;
+    }
 }

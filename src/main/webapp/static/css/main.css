@@ -1,7 +1,24 @@
-.char-holder-block{
+.char-holder-block {
     height: 300px;
     width: 500px;
 }
-.none{
+
+.login-main {
+    margin: 100px auto auto;
+    height: 300px;
+    width: 500px;
+    border: medium solid darkgrey;
+    border-radius: 10px
+}
+
+.login-form{
+    margin: 80px 100px;
+}
+
+.none {
     display: none;
+}
+
+.error{
+    color: red;
 }

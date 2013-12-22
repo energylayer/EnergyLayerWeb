@@ -4,25 +4,26 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 /**
  * @author: rkotelnikov
  */
 @MappedSuperclass
-public class AbstractEntity implements Entity<Long> {
+public class AbstractEntity<Pk extends Serializable> implements Entity<Pk> {
 
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    private Long id;
+    private Pk id;
 
     @Override
-    public Long getId() {
+    public Pk getId() {
         return id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(Pk id) {
         this.id = id;
     }
 }

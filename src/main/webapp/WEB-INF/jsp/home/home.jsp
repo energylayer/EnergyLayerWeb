@@ -10,12 +10,22 @@
 <body>
 <div id="contextPath" data-contextpath="<c:out value="${pageContext.servletContext.contextPath}"/>" class="none"></div>
 <div class="body">
-    <div class="header"><h3>HEAD</h3></div>
+    <div class="header">
+        <h3>HEAD</h3>
+        <sec:authorize access="isAnonymous()">
+            <%@include file="../login/loginForm.jspf" %>
+            <%@include file="../login/registerForm.jspf" %>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <span>You are logged in as <sec:authentication property="principal.username" /></span>
+            <%@include file="../login/logoutForm.jspf" %>
+        </sec:authorize>
+    </div>
     <div class="content">
         <div class="wrapper">
             <div id="chart-holder" class="char-holder-block"></div>
             <h2>Retrieving data for device id =</h2>
-            <input type="text" value="1"/>
+            <input type="text" name="deviceId" value="1"/>
         </div>
     </div>
     <div class="footer"><h3>FOOT</h3></div>

@@ -4,21 +4,161 @@
 }
 
 .login-main {
-    margin: 100px auto auto;
+    margin: 0 auto auto;
     height: 300px;
     width: 500px;
     border: medium solid darkgrey;
-    border-radius: 10px
+    border-radius: 10px;
+    background-color: #f7f7f7;
 }
 
-.login-form{
-    margin: 80px 100px;
+.login-form {
+    padding-left: 1em;
+    padding-top: 3em;
+    display: inline;
+    float: left;
+    height: 84%;
+    width: 47%;
+    border-right: 1px solid #E5E5E5;
+}
+
+.register-link{
+    padding-left: 1em;
+    padding-top: 3em;
+    display: inline;
+    float: left;
+}
+
+.register-link span{
+    white-space: nowrap;
+}
+
+.logo {
+    float: left;
+    display: inline;
+}
+
+.logo img {
+    width: 10em;
+}
+
+.header-container{
+    background-color: #f9f9f9;
+}
+
+header {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 60em;
+    display: table;
+}
+
+header nav {
+    float: right;
+    display: inline;
+}
+
+header nav ul {
+    list-style-type: none;
+}
+
+.login {
+    background-color: #f2f2f2;
+    color: #656565;
+    border-radius: 5px;
+    padding: 0.5em 2em;
+}
+
+.login-body {
+    background-color: #f2f2f2;
+    padding-top: 2em;
+    padding-bottom: 20em;
+}
+
+.adLine {
+    width: 100%;
+    background-color: #363E5B;
+    height: 7em;
+    color: #f2f2f2
+}
+
+.adLine div {
+    width: 60em;
+    margin: auto;
+    padding-top: 1em;
+    display: block;
+}
+
+.adVideo {
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.adVideo iframe {
+    margin: auto;
+    display: block;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.wrapper {
+    margin: 1em auto;
+    width: 60em;
+    display: block;
+    height: 20em;
+}
+
+.char-holder-block {
+    float: left;
+    display: inline;
+}
+
+.chart-adjustments {
+    float: right;
+    display: inline;
+}
+
+.footer-wrapper {
+    background-color: #313131;
+    color: #FFFFFF;
+    padding: 3em 0;
+    font-size: 0.8em;
+}
+
+footer {
+    margin: 1em auto;
+    width: 60em;
+    display: table;
+}
+
+.footer-div-left {
+    margin-left: 20em;
+    display: inline;
+    float: left;
+}
+
+.footer-div {
+    margin-left: 8em;
+    display: inline;
+    float: left;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer p {
+    text-align: center;
+    clear: both;
 }
 
 .none {
     display: none;
 }
 
-.error{
+.error {
     color: red;
 }

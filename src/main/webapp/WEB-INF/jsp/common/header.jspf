@@ -1,0 +1,26 @@
+<div class="header-container">
+    <header>
+        <div class="logo">
+            <a href="${home}">
+                <img src="<c:url value="/static/img/logo.png"/>">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <sec:authorize access="isAnonymous()">
+                    <c:url value="/login" var="loginUrl"/>
+                    <li>
+                        <a class="login" href="${loginUrl}">Log in</a>
+                    </li>
+                </sec:authorize>
+
+                <sec:authorize access="isAuthenticated()">
+                    <li>
+                        <span>You are logged in as <sec:authentication property="principal.username"/></span>
+                        <%@include file="../login/logoutForm.jspf" %>
+                    </li>
+                </sec:authorize>
+            </ul>
+        </nav>
+    </header>
+</div>

@@ -1,15 +1,14 @@
 package com.energylayer.service;
 
 import com.energylayer.entity.Data;
+import com.energylayer.model.DataQuery;
 
 /**
  * @author: rkotelnikov
  */
 public interface DataService {
 
-    void processData(Data data);
+    void processData(DataQuery data);
 
-    Integer getData(int deviceId);
-
-    Integer[] getAggregatedData(int deviceId, int number);
+    Integer[] getData(int deviceId, int sensorNumber, int count);
 }

@@ -7,5 +7,5 @@ import com.energylayer.entity.Data;
  */
 public interface DataDao extends Dao<Data, Long>{
 
-    Integer[] find(int deviceId, int count);
+    Integer[] find(int deviceId, int sensorNumber, int count);
 }

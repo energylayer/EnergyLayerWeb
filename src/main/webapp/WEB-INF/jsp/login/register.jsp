@@ -10,7 +10,7 @@
 <div class="login-body">
     <div class="login-main">
         <div class="login-form">
-            <form:form action="${createUrl}" commandName="userWeb">
+            <form:form action="${createUrl}" commandName="userQuery">
                 <div>
                     <form:label path="username"><spring:message code='username'/></form:label>
                     <form:input path="username"/>

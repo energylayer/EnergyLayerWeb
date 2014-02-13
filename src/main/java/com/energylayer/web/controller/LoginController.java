@@ -1,29 +1,14 @@
 package com.energylayer.web.controller;
 
-import com.energylayer.model.UserWeb;
+import com.energylayer.model.UserQuery;
 import com.energylayer.service.SecService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.validation.Valid;
-
-import java.util.ArrayList;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -49,20 +34,20 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login/create", method = POST)
-    public String create(@Valid @ModelAttribute UserWeb userWeb, BindingResult errors){
+    public String create(@Valid @ModelAttribute UserQuery userQuery, BindingResult errors){
         if(errors.hasErrors()){
             return "/login/register";
         }
-        if(secService.userExists(userWeb.getUsername())){
+        if(secService.userExists(userQuery.getUsername())){
             errors.rejectValue("username", "username.already.exists");
             return "/login/register";
         }
-        secService.createUser(userWeb);
+        secService.createUser(userQuery);
         return "redirect:/";
     }
 
     @ModelAttribute
-    public UserWeb userWeb(){
-        return new UserWeb();
+    public UserQuery userWeb(){
+        return new UserQuery();
     }
 }

@@ -1,6 +1,6 @@
 package com.energylayer.service.impl;
 
-import com.energylayer.model.UserWeb;
+import com.energylayer.model.UserQuery;
 import com.energylayer.service.SecService;
 import com.energylayer.utils.SecUtils;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,13 +24,13 @@ public class SecServiceImpl implements SecService {
         return userDetailsManager.userExists(username);
     }
 
-    public void createUser(UserWeb userWeb){
-        userDetailsManager.createUser(mapUser(userWeb));
+    public void createUser(UserQuery userQuery){
+        userDetailsManager.createUser(mapUser(userQuery));
     }
 
-    private User mapUser(UserWeb userWeb) {
-        String encryptedPassword = passwordEncoder.encode(userWeb.getPassword());
-        return new User(userWeb.getUsername(),
+    private User mapUser(UserQuery userQuery) {
+        String encryptedPassword = passwordEncoder.encode(userQuery.getPassword());
+        return new User(userQuery.getUsername(),
                 encryptedPassword,
                 new ArrayList<GrantedAuthority>(1){{add(SecUtils.UserRoles.DEFAULT_ROLE.grantedAuthority());}});
     }

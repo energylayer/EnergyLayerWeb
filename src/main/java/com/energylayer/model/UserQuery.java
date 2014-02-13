@@ -5,7 +5,7 @@ import net.sf.oval.constraint.NotEmpty;
 /**
  * @author: rkotelnikov
  */
-public class UserWeb {
+public class UserQuery {
 
     @NotEmpty(errorCode = "username.not.blank")
     private String username;

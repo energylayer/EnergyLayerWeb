@@ -8,7 +8,7 @@ $(function () {
     function retrievData(){
         var deviceId = $('input[name=deviceId]').val();
         $.ajax({
-            url: contextPath + '/data/get/' + deviceId,
+            url: contextPath + '/data/get/' + deviceId + '/1',
             dataType: "json",
             success: function(response){
                 if (data.length > 10) {
@@ -30,8 +30,8 @@ $(function () {
                 }
             },
             yaxis: {
-                min: 0,
-                max: 10 }
+                min: 4000,
+                max: 8000 }
         });
     }
 

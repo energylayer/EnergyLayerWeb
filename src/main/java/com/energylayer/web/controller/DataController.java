@@ -25,7 +25,7 @@ public class DataController {
 
     @RequestMapping(value = {"/post", "/post/{deviceId}/{data}"}, method = {GET, POST})
     @ResponseStatus(value = OK)
-    public void getFromSensor(@Valid DataQuery dataQuery){
+    public void getFromSensor(@Valid @ModelAttribute DataQuery dataQuery){
         System.out.println("/data/post/" + dataQuery.getDeviceId() + "/" + dataQuery.getData());
         dataService.processData(dataQuery);
     }

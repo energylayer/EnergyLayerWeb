@@ -17,19 +17,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  * @author: rkotelnikov
  */
 @Controller
+@RequestMapping(value = "/data")
 public class DataController {
 
     @Autowired
     private DataService dataService;
 
-    @RequestMapping(value = "/data/post", method = {GET, POST})
+    @RequestMapping(value = {"/post", "/post/{deviceId}/{data}"}, method = {GET, POST})
     @ResponseStatus(value = OK)
     public void getFromSensor(@Valid DataQuery dataQuery){
-        System.out.println("/data/post/" + dataQuery.getDeviceId() + "/" + dataQuery.getData().substring(4,8));
+        System.out.println("/data/post/" + dataQuery.getDeviceId() + "/" + dataQuery.getData());
         dataService.processData(dataQuery);
     }
 
-    @RequestMapping(value = "/data/get/{deviceId}/{sensorNumber}", method = GET)
+    @RequestMapping(value = "/get/{deviceId}/{sensorNumber}", method = GET)
     @ResponseBody
     public Integer[] getData(@PathVariable("deviceId") int deviceId,
                              @PathVariable("sensorNumber") int sensorNumber){
@@ -38,7 +39,7 @@ public class DataController {
         return result;
     }
 
-    @RequestMapping(value = "/data/aggregated/get/{deviceId}/sensorNumber", method = GET)
+    @RequestMapping(value = "/aggregated/get/{deviceId}/sensorNumber", method = GET)
     @ResponseBody
     public Integer[] getAggregatedData(@PathVariable("deviceId") int deviceId,
                                        @PathVariable("sensorNumber") int sensorNumber,

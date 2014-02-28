@@ -3,12 +3,17 @@ package com.energylayer.web.controller;
 import com.energylayer.service.DataService;
 import com.energylayer.model.DataQuery;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -16,7 +21,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 /**
  * @author: rkotelnikov
  */
-@Controller
+@RestController
 @RequestMapping(value = "/data")
 public class DataController {
 
@@ -31,17 +36,15 @@ public class DataController {
     }
 
     @RequestMapping(value = "/get/{deviceId}/{sensorNumber}", method = GET)
-    @ResponseBody
-    public Integer[] getData(@PathVariable("deviceId") int deviceId,
+    public @ResponseBody Integer[] getData(@PathVariable("deviceId") int deviceId,
                              @PathVariable("sensorNumber") int sensorNumber){
         Integer[] result = dataService.getData(deviceId, sensorNumber, 1);
-        System.out.println("/data/get/" + deviceId + "/" + result[0]);
+        System.out.println("/data/get/" + deviceId + "/" + Arrays.toString(result));
         return result;
     }
 
     @RequestMapping(value = "/aggregated/get/{deviceId}/sensorNumber", method = GET)
-    @ResponseBody
-    public Integer[] getAggregatedData(@PathVariable("deviceId") int deviceId,
+    public @ResponseBody Integer[] getAggregatedData(@PathVariable("deviceId") int deviceId,
                                        @PathVariable("sensorNumber") int sensorNumber,
                                        @RequestParam(value = "count", required = false, defaultValue = "10") int number){
         System.out.println("/data/aggregated/get/" + deviceId);

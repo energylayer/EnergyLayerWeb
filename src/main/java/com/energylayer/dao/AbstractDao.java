@@ -41,7 +41,6 @@ public class AbstractDao<E extends Entity<Pk>, Pk extends Serializable> implemen
         return count(criteria());
     }
 
-
     @Override
     public void saveOrUpdate(E entity) {
         getSession().saveOrUpdate(entity);
@@ -75,7 +74,6 @@ public class AbstractDao<E extends Entity<Pk>, Pk extends Serializable> implemen
                 .list();
     }
 
-
     /**
      * Do not use this method with criteria enriched with projections
      */
@@ -87,7 +85,7 @@ public class AbstractDao<E extends Entity<Pk>, Pk extends Serializable> implemen
     }
 
     @SuppressWarnings("unchecked")
-    private E unique(DetachedCriteria criteria){
+    protected E unique(DetachedCriteria criteria){
         return (E) criteria.getExecutableCriteria(getSession()).uniqueResult();
     }
 

@@ -17,8 +17,13 @@
                     <form:errors path="username" cssClass="error"/>
                 </div>
                 <div>
+                    <form:label path="email"><spring:message code='email'/></form:label>
+                    <form:input path="email"/>
+                    <form:errors path="email" cssClass="error"/>
+                </div>
+                <div>
                     <form:label path="password"><spring:message code='password'/></form:label>
-                    <form:input path="password"/>
+                    <form:password path="password"/>
                     <form:errors path="password" cssClass="error"/>
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

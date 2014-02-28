@@ -2,6 +2,7 @@ package com.energylayer.entity;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.io.Serializable;
 public class AbstractEntity<Pk extends Serializable> implements Entity<Pk> {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Pk id;
 

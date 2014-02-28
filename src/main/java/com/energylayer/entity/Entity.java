@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author: rkotelnikov
  */
-public interface Entity<Pk extends Serializable> {
+public interface Entity<Pk extends Serializable> extends Serializable {
 
     Pk getId();
 

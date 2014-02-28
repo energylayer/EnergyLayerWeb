@@ -18,22 +18,23 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * @author: rkotelnikov
  */
 @Controller
+@RequestMapping(value = "/login")
 public class LoginController {
 
     @Autowired
     private SecService secService;
 
-    @RequestMapping(value = "/login", method = GET)
+    @RequestMapping(value = "", method = GET)
     public String login(){
         return "/login/login";
     }
 
-    @RequestMapping(value = "/login/register", method = GET)
+    @RequestMapping(value = "/register", method = GET)
     public String register(){
         return "/login/register";
     }
 
-    @RequestMapping(value = "/login/create", method = POST)
+    @RequestMapping(value = "/create", method = POST)
     public String create(@Valid @ModelAttribute UserQuery userQuery, BindingResult errors){
         if(errors.hasErrors()){
             return "/login/register";
@@ -47,7 +48,7 @@ public class LoginController {
     }
 
     @ModelAttribute
-    public UserQuery userWeb(){
+    public UserQuery userQuery(){
         return new UserQuery();
     }
 }

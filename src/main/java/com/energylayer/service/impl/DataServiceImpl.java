@@ -6,9 +6,10 @@ import com.energylayer.model.DataQuery;
 import com.energylayer.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.springframework.transaction.annotation.Isolation.*;
+import static org.springframework.transaction.annotation.Propagation.*;
 
 /**
  * @author: rkotelnikov
@@ -20,14 +21,14 @@ public class DataServiceImpl implements DataService {
     private DataDao dataDao;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED, readOnly = false)
+    @Transactional(propagation = REQUIRED, isolation = READ_UNCOMMITTED, readOnly = false)
     public void processData(DataQuery dataQuery) {
         Data data = getDataFromQuery(dataQuery);
         dataDao.saveOrUpdate(data);
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED, readOnly = true)
+    @Transactional(propagation = REQUIRED, isolation = READ_UNCOMMITTED, readOnly = true)
     public Integer[] getData(int deviceId, int sensorNumber, int count) {
         return dataDao.find(deviceId, sensorNumber, count);
     }

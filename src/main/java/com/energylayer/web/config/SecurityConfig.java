@@ -1,5 +1,6 @@
 package com.energylayer.web.config;
 
+import com.energylayer.dao.UserDao;
 import com.energylayer.service.SecService;
 import com.energylayer.service.impl.SecServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
-import javax.sql.DataSource;
 
 /**
  * @author: rkotelnikov
@@ -24,9 +22,7 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private DataSource dataSource;
-
-    private JdbcUserDetailsManager jdbcUserDetailsManager;
+    private UserDao userDao;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,17 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .authorizeRequests()
                 .antMatchers("/login/**", "/data/**", "/static/**").permitAll()
-//                .anyRequest().authenticated();
-                .anyRequest().permitAll();
+                .anyRequest().authenticated();
+//                .anyRequest().permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .withDefaultSchema()
-                .passwordEncoder(passwordEncoder());
-        this.jdbcUserDetailsManager = (JdbcUserDetailsManager) auth.getDefaultUserDetailsService();
+        auth.userDetailsService(secService())
+            .passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -58,15 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JdbcUserDetailsManager jdbcUserDetailsManager(){
-        return this.jdbcUserDetailsManager;
-    }
-
-    @Bean
     public SecService secService(){
         SecServiceImpl secService = new SecServiceImpl();
         secService.setPasswordEncoder(passwordEncoder());
-        secService.setUserDetailsManager(jdbcUserDetailsManager);
+        secService.setUserDao(userDao);
         return secService;
     }
 }

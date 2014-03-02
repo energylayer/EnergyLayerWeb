@@ -15,7 +15,7 @@ Navigate to project folder
 
 Run jetty plugin via maven
 
->mvn jetty:run
+>mvn jetty:run -Dorg.eclipse.jetty.util.log.IGNORED=true -Dlog4j.configuration=file:./src/main/resources/log4j.properties
 
 Test it via browser
 

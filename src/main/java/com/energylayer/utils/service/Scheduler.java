@@ -17,7 +17,7 @@ public class Scheduler {
     @Autowired
     private MonitorManager monitorManager;
 
-    @Scheduled(fixedRate = 5_000)
+    @Scheduled(cron = "${heap.usage.log.cron}")
     public void heapUsageLogging(){
         log.info(monitorManager.heapUsage());
     }

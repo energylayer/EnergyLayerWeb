@@ -39,8 +39,8 @@ public class LoginController {
         if(errors.hasErrors()){
             return "/login/register";
         }
-        if(secService.userExists(userQuery.getUsername())){
-            errors.rejectValue("username", "username.already.exists");
+        if(secService.userExists(userQuery.getEmail())){
+            errors.rejectValue("email", "email.already.exists");
             return "/login/register";
         }
         secService.createUser(userQuery);

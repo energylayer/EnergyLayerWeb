@@ -17,7 +17,8 @@ import java.util.Set;
  */
 public class UserBuilder implements Builder<User> {
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
     private boolean enabled;
@@ -26,7 +27,8 @@ public class UserBuilder implements Builder<User> {
     @Override
     public User build() {
         User user = new User();
-        user.setName(name);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         user.setEmail(email);
         user.setPassword(password);
         user.setEnabled(enabled);
@@ -38,8 +40,13 @@ public class UserBuilder implements Builder<User> {
         return new UserBuilder();
     }
 
-    public UserBuilder withName(String name) {
-        this.name = name;
+    public UserBuilder withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public UserBuilder withLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 

@@ -8,5 +8,5 @@ import com.energylayer.entity.User;
  */
 public interface UserDao extends Dao<User, Integer> {
 
-    User findByName(String username);
+    User findByEmail(String email);
 }

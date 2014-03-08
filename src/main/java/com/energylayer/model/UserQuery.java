@@ -1,6 +1,7 @@
 package com.energylayer.model;
 
 import net.sf.oval.constraint.Email;
+import net.sf.oval.constraint.MaxLength;
 import net.sf.oval.constraint.NotEmpty;
 
 /**
@@ -8,21 +9,35 @@ import net.sf.oval.constraint.NotEmpty;
  */
 public class UserQuery {
 
-    @NotEmpty(errorCode = "username.not.blank")
-    private String username;
+    @NotEmpty(errorCode = "first.name.not.blank")
+    @MaxLength(errorCode = "name.length", value = 50)
+    private String firstName;
+
+    @MaxLength(errorCode = "name.length", value = 50)
+    private String lastName;
 
     @Email(errorCode = "email.violated")
+    @MaxLength(errorCode = "email.length", value = 255)
     private String email;
 
     @NotEmpty(errorCode = "password.not.blank")
+    @MaxLength(errorCode = "password.length", value = 255)
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {

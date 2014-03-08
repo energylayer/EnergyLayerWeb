@@ -15,7 +15,7 @@ public class AbstractEntity<Pk extends Serializable> implements Entity<Pk> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Pk id;
 
     @Override

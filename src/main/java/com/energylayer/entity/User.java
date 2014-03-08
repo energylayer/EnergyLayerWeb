@@ -19,10 +19,13 @@ import static javax.persistence.FetchType.*;
 @Table(name = "user")
 public class User extends AbstractEntity<Integer> {
 
-    @Column(name = "name", length = 50, nullable = false, unique = true)
-    private String name;
+    @Column(name = "first_name", length = 50, nullable = false)
+    private String firstName;
 
-    @Column(name = "email", length = 255, nullable = false)
+    @Column(name = "last_name", length = 50)
+    private String lastName;
+
+    @Column(name = "email", length = 255, nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", length = 255, nullable = false)
@@ -32,18 +35,26 @@ public class User extends AbstractEntity<Integer> {
     boolean enabled;
 
     @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_name", referencedColumnName = "name"),
-            uniqueConstraints = @UniqueConstraint(name = "user_name-user_role", columnNames = {"user_name", "user_role"}))
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            uniqueConstraints = @UniqueConstraint(name = "user_id-user_role", columnNames = {"user_id", "user_role"}))
     @Column(name = "user_role")
     @Enumerated(value = EnumType.STRING)
     private Set<Role> roles;
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {

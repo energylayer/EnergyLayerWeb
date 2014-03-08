@@ -17,8 +17,8 @@ public class UserDaoImpl extends AbstractDao<User, Integer> implements UserDao {
     }
 
     @Override
-    public User findByName(String username) {
-        return unique(criteria().add(Restrictions.eq("name", username)));
+    public User findByEmail(String email) {
+        return unique(criteria().add(Restrictions.eq("email", email)));
     }
 
 }

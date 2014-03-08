@@ -1,12 +1,12 @@
 <c:url value="/login" var="loginUrl"/>
 <form action="${loginUrl}" method="POST">
     <div>
-        <label for="username"><spring:message code='username'/></label>
-        <input id="username" name="username" type="text">
+        <label for="username"><spring:message code='email'/></label>
+        <input id="username" name="username" type="text" maxlength="255">
     </div>
     <div>
         <label for="password"><spring:message code='password'/></label>
-        <input id="password" name="password" type="password">
+        <input id="password" name="password" type="password" maxlength="255">
     </div>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <div>

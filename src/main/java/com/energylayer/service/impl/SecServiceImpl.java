@@ -30,8 +30,8 @@ public class SecServiceImpl implements SecService {
 
     @Override
     @Transactional(readOnly = true, isolation = READ_UNCOMMITTED, propagation = REQUIRED)
-    public boolean userExists(String username) {
-        return userDao.findByName(username) != null;
+    public boolean userExists(String email) {
+        return userDao.findByEmail(email) != null;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class SecServiceImpl implements SecService {
     @Override
     @Transactional(readOnly = true, isolation = READ_UNCOMMITTED, propagation = REQUIRED)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findByName(username);
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
+        User user = userDao.findByEmail(username);
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
                 Collections2.transform(user.getRoles(), new Function<Role, GrantedAuthority>() {
                     @Override
                     public GrantedAuthority apply(Role role) {
@@ -56,7 +56,8 @@ public class SecServiceImpl implements SecService {
     private User mapUser(UserQuery userQuery) {
         String encryptedPassword = passwordEncoder.encode(userQuery.getPassword());
         return UserBuilder.newInstance()
-                .withName(userQuery.getUsername())
+                .withFirstName(userQuery.getFirstName())
+                .withLastName(userQuery.getLastName())
                 .withEmail(userQuery.getEmail())
                 .withPassword(encryptedPassword)
                 .withEnabled(true)

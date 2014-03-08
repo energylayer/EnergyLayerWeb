@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface SecService extends UserDetailsService {
 
-    boolean userExists(String username);
+    boolean userExists(String email);
 
     void createUser(UserQuery userQuery);
 }

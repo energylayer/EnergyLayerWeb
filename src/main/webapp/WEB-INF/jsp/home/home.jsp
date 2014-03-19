@@ -185,7 +185,7 @@
         update();
 
         //SSE
-        var source = new EventSource("http://162.243.226.226:8080/data/get/SSE/1/1");
+        var source = new EventSource("/data/get/SSE/1/1");
         source.onmessage = function(event) {
             var sData;  //local variable to save data for server
             sData = event.data;

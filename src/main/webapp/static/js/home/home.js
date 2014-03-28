@@ -37,7 +37,7 @@ $(function () {
     update();
 
     //SSE
-    var source = new EventSource(contextPath + '/data/get/SSE/' + deviceId);
+    var source = new EventSource('/rs/data/get/' + deviceId);
     source.onmessage = function (event) {
         document.getElementById('currentPowerHolder').innerHTML = event.data;
         sensorData = event.data / 100;

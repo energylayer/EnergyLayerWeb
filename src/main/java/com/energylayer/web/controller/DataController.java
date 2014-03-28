@@ -47,20 +47,11 @@ public class DataController {
         return result;
     }
 //for SSE
-    @RequestMapping(value = "/get/SSE/{deviceId}/{sensorNumber}", method = GET)
-    public @ResponseBody String getSSEData(@PathVariable("deviceId") int deviceId,
-                                           @PathVariable("sensorNumber") int sensorNumber){
-        Integer[] result = dataService.getData(deviceId, sensorNumber, 1);
+    @RequestMapping(value = "/get/SSE/{deviceId}", method = GET)
+    public @ResponseBody String getSSEData(@PathVariable("deviceId") int deviceId){
+        Integer[] result = dataService.getData(deviceId, 1, 1);
         String SSE_result = "data:" + result[0].toString() + "\n\n";
         log.info("/data/get/SSE/{}/{}", deviceId, "result[0]=" + result[0].toString());
         return SSE_result;
-    }
-
-    @RequestMapping(value = "/aggregated/get/{deviceId}/sensorNumber", method = GET)
-    public @ResponseBody Integer[] getAggregatedData(@PathVariable("deviceId") int deviceId,
-                                       @PathVariable("sensorNumber") int sensorNumber,
-                                       @RequestParam(value = "count", required = false, defaultValue = "10") int number){
-        log.info("/data/aggregated/get/{}", deviceId);
-        return dataService.getData(deviceId, sensorNumber, number);
     }
 }

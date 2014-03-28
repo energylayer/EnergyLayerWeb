@@ -1,6 +1,5 @@
 package com.energylayer.service;
 
-import com.energylayer.entity.Data;
 import com.energylayer.model.DataQuery;
 
 /**

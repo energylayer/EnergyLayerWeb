@@ -41,7 +41,9 @@
         <div id="chart-placeholder" style="height:400px;" class="col-md-11"></div>
         <div class="col-md-1">
             <h3>device id</h3>
-            <input type="text" name="deviceId" value="1" size="3"/>
+            <input type="text" name="deviceId" value="1"/>
+            <h3>sensor number</h3>
+            <input type="text" name="sensorNumber" value="1" size="1"/>
         </div>
     </div>
 </div>

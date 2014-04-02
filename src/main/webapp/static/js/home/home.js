@@ -1,13 +1,12 @@
 ;
 $(function () {
     var contextPath = $('#contextPath').data('contextpath');
-    var deviceId = $('input[name=deviceId]').val();
     var totalPoints = 1300;
     var data = [];
     var sensorData = 100;
     var realTimeTimeout;
     var plot;
-    var eventSource;
+    var updateCount = 0;
 
     (function init(){
         initUI();
@@ -38,9 +37,10 @@ $(function () {
     }
     function drawHourly(){
         clearTimeout(realTimeTimeout);
-        eventSource.close();
+        var deviceId = $('input[name=deviceId]').val();
+        var sensorNumber = $('input[name=sensorNumber]').val();
         $.ajax({
-            url: contextPath + '/rs/data/get/aggregated/' + deviceId + '/hour',
+            url: contextPath + '/rs/data/get/aggregated/' + deviceId + '/hour?sensorNumber=' + sensorNumber,
             dataType: "json",
             success: function(response){
                 plot = $.plot($('#chart-placeholder'), [{color: 'green', data: mapData(response.data)}], {
@@ -78,6 +78,20 @@ $(function () {
             return result;
         }
         function update() {
+            var deviceId = $('input[name=deviceId]').val();
+            var sensorNumber = $('input[name=sensorNumber]').val();
+            if (updateCount == 9) {
+                $.ajax({
+                    url: contextPath + '/rs/data/get/' + deviceId + '?sensorNumber=' + sensorNumber,
+                    dataType: "json",
+                    success: function (response) {
+                        document.getElementById('currentPowerHolder').innerHTML = response.data;
+                        sensorData = response.data / 100;
+                    }
+                });
+                updateCount = 0;
+            }
+            updateCount++;
             plot.setData([
                 {color: 'green', data: getData()}
             ]);
@@ -85,11 +99,5 @@ $(function () {
             realTimeTimeout = setTimeout(update, 300);
         }
         update();
-
-        eventSource = new EventSource('/rs/data/get/' + deviceId);
-        eventSource.onmessage = function (event) {
-            document.getElementById('currentPowerHolder').innerHTML = event.data;
-            sensorData = event.data / 100;
-        };
     }
 });

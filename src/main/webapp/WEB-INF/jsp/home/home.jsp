@@ -30,6 +30,12 @@
         <h1>Live chart</h1>
         <p>This is a chart with the real-time data stream from the sensor(s)</p>
         <h2>Solar panel power output: <span id="currentPowerHolder">0000</span> Watt.</h2>
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li id="realTime" class="active"><a href="#">Real time</a></li>
+                <li id="hourly"><a href="#">Hourly</a></li>
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div id="chart-placeholder" style="height:400px;" class="col-md-11"></div>

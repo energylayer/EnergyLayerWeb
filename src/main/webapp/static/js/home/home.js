@@ -1,6 +1,7 @@
 ;
 $(function () {
     var contextPath = $('#contextPath').data('contextpath');
+    var chartContainer = $('#chart-placeholder');
     var totalPoints = 1300;
     var data = [];
     var sensorData = 100;
@@ -43,7 +44,7 @@ $(function () {
             url: contextPath + '/rs/data/get/aggregated/' + deviceId + '/hour?sensorNumber=' + sensorNumber,
             dataType: "json",
             success: function(response){
-                plot = $.plot($('#chart-placeholder'), [{color: 'green', data: mapData(response.data)}], {
+                plot = $.plot($(chartContainer), [{color: 'green', data: mapData(response.data)}], {
                     series: {
                         lines: {show: true, fill: 0.15, lineWidth: 4}
                     }
@@ -59,7 +60,7 @@ $(function () {
         return result;
     }
     function initChart(){
-        plot = $.plot($('#chart-placeholder'), [{color: 'green', data: getData()}], {
+        plot = $.plot($(chartContainer), [{color: 'green', data: getData()}], {
             series: {
                 lines: {show: true, fill: 0.15, lineWidth: 4}
             }

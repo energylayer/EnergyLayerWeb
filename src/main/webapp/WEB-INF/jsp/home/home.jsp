@@ -34,6 +34,7 @@
             <ul class="nav navbar-nav">
                 <li id="realTime" class="active"><a href="#">Real time</a></li>
                 <li id="hourly"><a href="#">Hourly</a></li>
+                <li id="daily"><a href="#">Daily</a></li>
             </ul>
         </div>
     </div>

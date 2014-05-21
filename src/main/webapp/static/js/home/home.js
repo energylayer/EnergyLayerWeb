@@ -24,6 +24,7 @@ $(function () {
             }
             $this.addClass('active');
             $('#hourly').removeClass('active');
+            $('#daily').removeClass('active');
             initUI();
         });
         $('#hourly').on('click', function(){
@@ -33,7 +34,34 @@ $(function () {
             }
             $this.addClass('active');
             $('#realTime').removeClass('active');
+            $('#daily').removeClass('active');
             drawHourly();
+        });
+        $('#daily').on('click', function(){
+            var $this = $(this);
+            if ($this.hasClass('active')){
+                return;
+            }
+            $this.addClass('active');
+            $('#realTime').removeClass('active');
+            $('#hourly').removeClass('active');
+            drawDaily();
+        });
+    }
+    function drawDaily(){
+        clearTimeout(realTimeTimeout);
+        var deviceId = $('input[name=deviceId]').val();
+        var sensorNumber = $('input[name=sensorNumber]').val();
+        $.ajax({
+            url: contextPath + '/rs/data/get/aggregated/' + deviceId + '/day?sensorNumber=' + sensorNumber,
+            dataType: "json",
+            success: function(response){
+                plot = $.plot($(chartContainer), [{color: 'green', data: mapData(response.data)}], {
+                    series: {
+                        lines: {show: true, fill: 0.15, lineWidth: 4}
+                    }
+                });
+            }
         });
     }
     function drawHourly(){
@@ -55,7 +83,7 @@ $(function () {
     function mapData(data){
         var result = [];
         for (var i = data.length; i > 0; i--) {
-            result.push([i, (data[i]/300)])
+            result.push([i, (data[i]/100)])
         }
         return result;
     }

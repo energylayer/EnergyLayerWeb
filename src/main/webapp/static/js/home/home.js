@@ -14,6 +14,7 @@ $(function () {
         bingEvents();
     })();
     function initUI(){
+        loadDevices();
         initChart();
     }
     function bingEvents(){
@@ -47,10 +48,69 @@ $(function () {
             $('#hourly').removeClass('active');
             drawDaily();
         });
+        $('#addDevice').on('click', function(){
+            $('#devideDialog').dialog('open');
+        });
+        $('#devideDialog').dialog({
+            autoOpen: false,
+            title: "Add new device",
+            buttons: [{
+                text: "Add",
+                click: function () {
+                    var url = contextPath + '/device';
+                    $("#deviceForm").ajaxSubmit({
+                        url: url,
+                        type: 'post',
+                        success: function(){
+                            drawDevice($('input[name=deviceId]').val(), 'device');
+                            $('#devideDialog').dialog('close');
+                        },
+                        error: function(response){
+                            $('#addDeviceResponseError').remove();
+                            $('#deviceForm').after($('<span/>', {id:'addDeviceResponseError',text:response.responseText}));
+                        }
+                    })
+                }
+            }]
+        });
+        $('.device').on('click', function() {
+            $('.device').removeClass('device-highlighted');
+            $(this).addClass('device-highlighted');
+        })
+    }
+    function loadDevices() {
+        if($('.logged-in').length == 0) {
+            drawDevices([1]);
+            return;
+        }
+        $.ajax({
+            url: contextPath + '/device/deviceIds',
+            dataType: 'json',
+            async: false,
+            success: function (response) {
+                if (response.length > 0) {
+                    drawDevices(response);
+                } else {
+                    drawDevices([1]);
+                }
+            }
+        });
+    }
+    function drawDevices(deviceIds) {
+        $.each(deviceIds, function(i, val) {
+            var style = 'device';
+            if (i==0){
+                style += ' device-highlighted';
+            }
+            drawDevice(val, style)
+        });
+    }
+    function drawDevice(deviceId, style) {
+        $('#deviceContainer').append($('<div/>', {text:deviceId,class:style}));
     }
     function drawDaily(){
         clearTimeout(realTimeTimeout);
-        var deviceId = $('input[name=deviceId]').val();
+        var deviceId = $('.device-highlighted').text();
         var sensorNumber = $('input[name=sensorNumber]').val();
         $.ajax({
             url: contextPath + '/rs/data/get/aggregated/' + deviceId + '/day?sensorNumber=' + sensorNumber,
@@ -66,7 +126,7 @@ $(function () {
     }
     function drawHourly(){
         clearTimeout(realTimeTimeout);
-        var deviceId = $('input[name=deviceId]').val();
+        var deviceId = $('.device-highlighted').text();
         var sensorNumber = $('input[name=sensorNumber]').val();
         $.ajax({
             url: contextPath + '/rs/data/get/aggregated/' + deviceId + '/hour?sensorNumber=' + sensorNumber,
@@ -107,7 +167,7 @@ $(function () {
             return result;
         }
         function update() {
-            var deviceId = $('input[name=deviceId]').val();
+            var deviceId = $('.device-highlighted').text();
             var sensorNumber = $('input[name=sensorNumber]').val();
             if (updateCount == 9) {
                 $.ajax({

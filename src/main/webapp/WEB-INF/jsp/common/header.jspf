@@ -20,7 +20,7 @@
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li>
-                        <span>You are logged in as <sec:authentication property="principal.username"/></span>
+                        <span class="logged-in">You are logged in as <sec:authentication property="principal.username"/></span>
                     </li>
                     <li class="active"><%@include file="../login/logoutForm.jspf" %></li>
                 </sec:authorize>

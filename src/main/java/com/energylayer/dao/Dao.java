@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface Dao<E, Pk extends Serializable> {
 
-    E findByID(Pk id);
+    E findById(Pk id);
 
     List<E> findAll();
 

@@ -42,6 +42,12 @@ public class SecServiceImpl implements SecService {
 
     @Override
     @Transactional(readOnly = true, isolation = READ_UNCOMMITTED, propagation = REQUIRED)
+    public User findByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    @Override
+    @Transactional(readOnly = true, isolation = READ_UNCOMMITTED, propagation = REQUIRED)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByEmail(username);
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),

@@ -10,8 +10,11 @@
 
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="<c:url value="/static/css/main.css"/>" type="text/css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="http://malsup.github.com/jquery.form.js" type="text/javascript"></script>
     <script src="<c:url value="/static/js/jquery.flot.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/static/js/home/home.js"/>" type="text/javascript"></script>
 
@@ -40,11 +43,16 @@
     </div>
     <div class="row">
         <div id="chart-placeholder" style="height:400px;" class="col-md-11"></div>
-        <div class="col-md-1">
-            <h3>device id</h3>
-            <input type="text" name="deviceId" value="1"/>
-            <h3>sensor number</h3>
-            <input type="text" name="sensorNumber" value="1" size="1"/>
+        <div id="deviceContainer" class="col-md-1">
+            <input type="hidden" name="sensorNumber" value="1" size="1"/>
+            <button id="addDevice">Add device</button>
+            <div id='devideDialog'>
+                <form id="deviceForm">
+                    <label for="deviceId">Device ID</label>
+                    <input type="text" id="deviceId" name="deviceId"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+            </div>
         </div>
     </div>
 </div>

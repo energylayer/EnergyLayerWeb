@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,7 +26,7 @@ public class AbstractDao<E extends Entity<Pk>, Pk extends Serializable> implemen
 
     @Override
     @SuppressWarnings("unchecked")
-    public E findByID(Pk id) {
+    public E findById(Pk id) {
         return (E) getSession().get(entityClass, id);
     }
 
@@ -48,7 +47,7 @@ public class AbstractDao<E extends Entity<Pk>, Pk extends Serializable> implemen
 
     @Override
     public void delete(Pk id) {
-        getSession().delete(findByID(id));
+        getSession().delete(findById(id));
     }
 
     @Override

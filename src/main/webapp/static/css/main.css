@@ -162,3 +162,15 @@ footer p {
 .error {
     color: red;
 }
+
+.device {
+    width: 5em;
+    background: #656565;
+    margin: 3px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.device-highlighted {
+    background: #66CC33;
+}
